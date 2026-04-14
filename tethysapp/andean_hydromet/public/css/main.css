@@ -1,0 +1,222 @@
+:root {
+  --hm-ink: #12211f;
+  --hm-muted: #51625f;
+  --hm-line: #d7e1de;
+  --hm-bg: #f6faf9;
+  --hm-panel: #ffffff;
+  --hm-teal: #177e89;
+  --hm-green: #3b8f2f;
+  --hm-red: #c43e2f;
+  --hm-yellow: #f0c419;
+}
+
+.hydromet-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+  gap: 24px;
+  align-items: end;
+  padding: 28px;
+  background: linear-gradient(135deg, #e7f5f2 0%, #ffffff 52%, #eef7eb 100%);
+  border: 1px solid var(--hm-line);
+  border-radius: 8px;
+}
+
+.hydromet-hero h1 {
+  max-width: 780px;
+  margin: 4px 0 12px;
+  color: var(--hm-ink);
+  font-size: 34px;
+  line-height: 1.12;
+}
+
+.hydromet-hero p {
+  max-width: 760px;
+  color: var(--hm-muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--hm-teal);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.station-facts,
+.metric-card,
+.status-panel,
+.map-panel,
+.plot-frame {
+  border: 1px solid var(--hm-line);
+  border-radius: 8px;
+  background: var(--hm-panel);
+}
+
+.station-facts {
+  display: flex;
+  min-height: 140px;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 22px;
+}
+
+.station-facts span,
+.metric-card span,
+.fine-print {
+  color: var(--hm-muted);
+}
+
+.station-facts strong,
+.metric-card strong {
+  color: var(--hm-ink);
+  font-size: 24px;
+}
+
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.metric-card {
+  min-height: 116px;
+  padding: 18px;
+}
+
+.metric-card span,
+.metric-card small {
+  display: block;
+}
+
+.metric-card strong {
+  display: block;
+  margin: 12px 0 6px;
+}
+
+.hydromet-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(240px, 0.85fr);
+  gap: 18px;
+}
+
+.station-map {
+  position: relative;
+  min-height: 330px;
+  overflow: hidden;
+  border-radius: 8px 8px 0 0;
+  background:
+    linear-gradient(90deg, rgba(23, 126, 137, 0.18), rgba(59, 143, 47, 0.14)),
+    url("https://tile.openstreetmap.org/12/1155/2050.png");
+  background-size: cover;
+}
+
+.map-fallback {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  max-width: 260px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--hm-ink);
+}
+
+.map-fallback span,
+.map-fallback strong {
+  display: block;
+}
+
+.panel-copy,
+.status-panel {
+  padding: 22px;
+}
+
+.panel-copy h2,
+.status-panel h2,
+.section-heading h2 {
+  margin: 0 0 10px;
+  color: var(--hm-ink);
+}
+
+.status-panel dl {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 12px;
+  margin: 0;
+}
+
+.status-panel dt {
+  color: var(--hm-muted);
+  font-weight: 600;
+}
+
+.status-panel dd {
+  margin: 0;
+  color: var(--hm-ink);
+  overflow-wrap: anywhere;
+}
+
+.plot-section,
+.metrics-table-section {
+  margin-top: 22px;
+}
+
+.section-heading {
+  margin-bottom: 12px;
+}
+
+.plot-frame {
+  min-height: 240px;
+  padding: 12px;
+  overflow-x: auto;
+}
+
+.hydromet-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--hm-line);
+  background: #ffffff;
+}
+
+.hydromet-table th,
+.hydromet-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--hm-line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.hydromet-table th {
+  color: var(--hm-ink);
+  background: var(--hm-bg);
+}
+
+.action-form {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 900px) {
+  .hydromet-hero,
+  .hydromet-layout,
+  .metric-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .hydromet-hero h1 {
+    font-size: 28px;
+  }
+
+  .station-map {
+    min-height: 260px;
+  }
+
+  .status-panel dl {
+    grid-template-columns: 1fr;
+  }
+}

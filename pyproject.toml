@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tethysapp-andean_hydromet"
+version = "0.1.0"
+description = "Tethys app for station-calibrated INAMHI and ECMWF hydro-meteorological forecasts."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "BSD-2-Clause" }
+authors = [
+  { name = "Andean HydroMet Sentinel Team" }
+]
+dependencies = [
+  "numpy",
+  "pandas",
+  "plotly",
+  "requests",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["*"]
+
+[tool.setuptools.package-data]
+"tethysapp.andean_hydromet" = [
+  "templates/**/*",
+  "public/**/*",
+  "resources/**/*",
+  "workspaces/**/*"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

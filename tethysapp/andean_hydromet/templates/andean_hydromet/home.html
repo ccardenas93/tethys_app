@@ -1,0 +1,157 @@
+{% extends tethys_app.package|add:"/base.html" %}
+{% load static %}
+
+{% block app_content %}
+  <section class="hydromet-hero">
+    <div>
+      <p class="eyebrow">Quito station pilot</p>
+      <h1>Station-calibrated hydro-meteorological forecast</h1>
+      <p>
+        INAMHI observations anchor the local signal. ECMWF open data supplies the
+        forecast. The archive verifies each run so the correction can learn from
+        this station over time.
+      </p>
+      <p class="fine-print">
+        Original-compatible output: {{ forecast_original_html_path }}
+      </p>
+    </div>
+    <div class="station-facts" aria-label="station facts">
+      <span>{{ station.name }}</span>
+      <strong>{{ station.network }} {{ station.station_id }}</strong>
+      <small>{{ station.basin_context }}</small>
+    </div>
+  </section>
+
+  <section class="metric-strip" aria-label="dashboard summary">
+    {% for card in cards %}
+      <article class="metric-card">
+        <span>{{ card.label }}</span>
+        <strong>{{ card.value }}</strong>
+        <small>{{ card.detail }}</small>
+      </article>
+    {% endfor %}
+  </section>
+
+  <section class="hydromet-layout">
+    <div class="map-panel">
+      <div
+        id="station-map"
+        class="station-map"
+        data-lat="{{ station_lat }}"
+        data-lon="{{ station_lon }}"
+        data-name="{{ station.name }}"
+      >
+        <div class="map-fallback">
+          <span>Station position</span>
+          <strong>{{ station_lat }}, {{ station_lon }}</strong>
+        </div>
+      </div>
+      <div class="panel-copy">
+        <h2>Station context</h2>
+        <p>
+          Latest station observation: {{ observation_context.latest_observation|default:"warming up" }}.
+          The current HydroMet level is {{ risk.level|default:"warming up" }}.
+        </p>
+        <p class="fine-print">{{ risk.explain }}</p>
+      </div>
+    </div>
+
+    <div class="status-panel">
+      <h2>Run status</h2>
+      <dl>
+        <dt>Mode</dt>
+        <dd>{{ mode }}</dd>
+        <dt>Last run</dt>
+        <dd>{{ run_time|default:"not generated" }}</dd>
+        <dt>ECMWF source</dt>
+        <dd>{{ ecmwf_source|default:"not available" }}</dd>
+        <dt>Archive rows</dt>
+        <dd>{{ artifact_counts.archive_rows|default:"0" }}</dd>
+        <dt>Verified rows</dt>
+        <dd>{{ artifact_counts.verification_rows|default:"0" }}</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section class="plot-section">
+    <div class="section-heading">
+      <p class="eyebrow">Forecast</p>
+      <h2>Bias-corrected temperature forecast</h2>
+    </div>
+    <div class="plot-frame">
+      {{ forecast_html|safe }}
+    </div>
+  </section>
+
+  <section class="plot-section">
+    <div class="section-heading">
+      <p class="eyebrow">Verification</p>
+      <h2>Model skill by target and lead hour</h2>
+    </div>
+    <div class="plot-frame">
+      {{ metrics_html|safe }}
+    </div>
+  </section>
+
+  <section class="metrics-table-section">
+    <div class="section-heading">
+      <p class="eyebrow">Contest evidence</p>
+      <h2>Target-level verification</h2>
+    </div>
+    <table class="hydromet-table">
+      <thead>
+        <tr>
+          <th>Target</th>
+          <th>Samples</th>
+          <th>Corrected MAE</th>
+          <th>Raw MAE</th>
+          <th>Persistence MAE</th>
+          <th>Improvement</th>
+          <th>Vs Persistence</th>
+          <th>Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in target_metrics %}
+          <tr>
+            <td>{{ row.target }}</td>
+            <td>{{ row.samples }}</td>
+            <td>{{ row.forecast_mae_c }}</td>
+            <td>{{ row.raw_mae_c }}</td>
+            <td>{{ row.persistence_mae_c }}</td>
+            <td>{{ row.vs_raw_c }}</td>
+            <td>{{ row.vs_persistence_c }}</td>
+            <td>{{ row.coverage }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="8">Metrics will appear after the archive has verified forecasts.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}
+
+{% block app_actions %}
+  <a class="btn btn-default" href="{% url 'andean_hydromet:home' %}">Refresh View</a>
+{% endblock %}
+
+{% block styles %}
+  {{ block.super }}
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIINfQMoB8xFH0r+HMv47u9XyMgtkh71yZ0="
+    crossorigin=""
+  >
+{% endblock %}
+
+{% block scripts %}
+  {{ block.super }}
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+{% endblock %}

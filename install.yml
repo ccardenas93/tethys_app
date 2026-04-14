@@ -1,0 +1,22 @@
+version: 1.1
+tethys_version: ">=4.5.0"
+name: andean_hydromet
+
+requirements:
+  skip: false
+  conda:
+    channels:
+      - conda-forge
+    packages:
+      - pandas
+      - numpy
+      - plotly
+      - requests
+      - ecmwf-opendata
+      - cfgrib
+      - eccodes
+      - pytest
+  pip: []
+  npm: {}
+
+post: []

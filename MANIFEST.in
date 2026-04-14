@@ -1,0 +1,2 @@
+recursive-include tethysapp/andean_hydromet/templates *
+recursive-include tethysapp/andean_hydromet/public *

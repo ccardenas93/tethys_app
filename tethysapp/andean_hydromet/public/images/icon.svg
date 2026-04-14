@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">Andean HydroMet Sentinel</title>
+  <desc id="desc">Mountain, water, and station signal icon.</desc>
+  <rect width="128" height="128" rx="8" fill="#177e89"/>
+  <path d="M8 92 L38 44 L55 72 L72 34 L120 92 Z" fill="#f6faf9"/>
+  <path d="M8 92 C28 82 42 104 64 92 C84 82 98 104 120 92 L120 120 L8 120 Z" fill="#3b8f2f"/>
+  <circle cx="87" cy="41" r="9" fill="#f0c419"/>
+  <path d="M64 93 L64 68" stroke="#12211f" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="64" cy="64" r="8" fill="#c43e2f"/>
+  <path d="M51 51 C58 44 70 44 77 51" fill="none" stroke="#12211f" stroke-width="5" stroke-linecap="round"/>
+</svg>
