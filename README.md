@@ -30,7 +30,7 @@ tool.
 From a fresh clone:
 
 ```bash
-git clone git@github.com:ccardenas93/tethys_app.git
+git clone https://github.com/ccardenas93/tethys_app.git
 cd tethys_app
 ./scripts/bootstrap.sh
 ./scripts/start_server.sh
